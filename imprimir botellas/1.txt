@@ -1,0 +1,29 @@
+1 display LCD1602
+1 modulo i2c para pantallas 
+1 modulo reductor de voltaje 24v a 5v
+1 resistencia 10k
+1 boquilla extrusora para impresora con salida a 1.75mm o 2mm
+1 pushbutton
+1 encoder rotatorio modulo para Arduino
+1 resistencia cerámica 12/24v 40w
+1 Termistor 100k Ntc 3950
+1 Arduino uno
+1 placa de desarrollo para Arduino uno
+1 led
+1 base metálica para led verde similar a esta:
+
+https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fshop.inforbatista.pt%2F1209-large_default%2Fled-com-caixa-metalica-verde.jpg&f=1&nofb=1&ipt=1291961fb19d2f409c62a3fae1add04bc4a02795eeec3449a96a34b2c04b7d18&ipo=images
+-----------------------------------
+
+Antes de empezar debes saber que este proyecto es para impresoras que tienen extrusion directa, en mi caso modifique mi ender 3 v2 imprimiendo una pieza y cambiando el parametron de retracción del material, la pieza que imprimí es esta:
+
+https://www.printables.com/model/354524-ender-3-v2-direct-extruder-mount
+
+Créditos para: 	soullantern
+		@soullantern_473046
+-----------------------------------
+
+Además, la idea original fue tomada de un canal de youtube en ingles y paratacamite es una idea copiada, sin embargo, lo único que tome fue el modelo del cortador de botellas, la base del extrusor y la idea principal, aun así el crédito es para el propietario del canal original:
+
+https://www.youtube.com/@ecodecat3d
+-----------------------------------
