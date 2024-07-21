@@ -13,6 +13,7 @@ int led = 9;
 int sound = 10;
 int soundCount = 3;
 int fin = 0;
+int state = 0;          //estado del mosfet, encendido, apagado
 
 // Definir conexiones del MOSFET y termistor
 const int mosfetPin = 5;      // Pin de control del MOSFET
@@ -46,6 +47,12 @@ float readings[numReadings];
 int readIndex = 0;
 float total = 0;
 float average = 0;
+
+// Variables para el control de tiempo
+unsigned long mosfetOnTime = 0;
+unsigned long mosfetOffTime = 0;
+const unsigned long maxOnTime = 500; // Máximo tiempo encendido en milisegundos (ajustar según sea necesario)
+const unsigned long maxOffTime = 3500; // Máximo tiempo apagado en milisegundos (ajustar según sea necesario)
 
 void setup() {
   Serial.begin(9600);
@@ -94,6 +101,9 @@ void setup() {
     delay(1000);
     digitalWrite(sound, LOW);
   }
+
+  //apagar led
+  digitalWrite(led, LOW);
 }
 
 void loop() {
@@ -146,11 +156,16 @@ void loop() {
     lastReadTime = millis();
   }
 
-  // Control del MOSFET basado en la temperatura
-  if (temperatureA >= temperatureD - 0.5) {
-    digitalWrite(mosfetPin, LOW);  // Apagar MOSFET
-  } else {
+  // Control del MOSFET basado en la temperatura y tiempos máximos de encendido/apagado
+  unsigned long currentTime = millis();
+  if (state == 0 && temperatureA < temperatureD && currentTime - mosfetOffTime >= maxOffTime) {
     digitalWrite(mosfetPin, HIGH); // Encender MOSFET
+    state = 1;
+    mosfetOnTime = currentTime;
+  } else if (state == 1 && (temperatureA >= temperatureD || currentTime - mosfetOnTime >= maxOnTime)) {
+    digitalWrite(mosfetPin, LOW);  // Apagar MOSFET
+    state = 0;
+    mosfetOffTime = currentTime;
   }
 
   // Actualizar la pantalla cada 500 ms
@@ -169,6 +184,14 @@ void updateTemperatureScreen() {
     lcd.print(" C   ");
     lastTemperatureD = temperatureD;
   }
+
+  lcd.setCursor(13, 0);
+  if(state == 0){
+    lcd.print("off");
+  }else if(state == 1){
+    lcd.print("on ");
+  }
+
   lcd.setCursor(0, 1);
   lcd.print("T. A. ");
   lcd.print((int)temperatureA);
@@ -190,3 +213,4 @@ void readTemperature() {
   average = total / numReadings;
   temperatureA = average;
 }
+
