@@ -11,6 +11,8 @@
 1 placa de desarrollo para Arduino uno
 1 led
 1 base metálica para led verde similar a esta:
+1 mosfet irf540n /o un  reelevador en caso de que la tension llegue a quemar el transistor
+
 
 https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fshop.inforbatista.pt%2F1209-large_default%2Fled-com-caixa-metalica-verde.jpg&f=1&nofb=1&ipt=1291961fb19d2f409c62a3fae1add04bc4a02795eeec3449a96a34b2c04b7d18&ipo=images
 -----------------------------------
